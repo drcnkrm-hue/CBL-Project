@@ -1,7 +1,19 @@
 import java.util.Scanner;
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.util.Random;
 
 public class TUI {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+
+        File file = new File("valid-wordle-words.txt");
+
+        Boolean IsAWord = false;
+
+        Boolean WonOrNot = false;
+
+        Scanner fileScanner = new Scanner(file);
 
         char[] LetterList = new char[5];
 
@@ -9,7 +21,17 @@ public class TUI {
 
         String[] ColorCode = new String[5];
 
-        String ActualWord = "hello";
+        Random random = new Random();
+
+        int WordNumber = random.nextInt(14856);
+
+        for (int i = 0; i < WordNumber; i++) {
+            fileScanner.nextLine();
+        }
+
+        String ActualWord = fileScanner.nextLine();
+
+        System.out.println(ActualWord);
 
         for (int i = 0; i < 5; i++) {
 
@@ -21,15 +43,24 @@ public class TUI {
 
         Scanner scanner = new Scanner(System.in);
 
-        WordChecker checker = new WordChecker();
-
         String TheWord = scanner.nextLine();
+
+        while (fileScanner.hasNextLine()) {
+
+            String WordCheck = fileScanner.nextLine();
+
+            if (TheWord.equals(WordCheck)) {
+
+                IsAWord = true;
+                break;
+            }
+        }
 
         if (TheWord.length() != 5) {
 
             System.out.println("Not 5 letters!");
 
-        } else if (checker.exists(TheWord)) {
+        } else if (IsAWord) {
 
             for (int i = 0; i < 5; i++) {
 
