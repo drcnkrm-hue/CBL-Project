@@ -13,24 +13,10 @@ import javax.swing.border.EmptyBorder; // Allows us to create empty space around
 // GUI extends JFrame, meaning that a GUI object is also a graphical application window.
 public class GUI extends JFrame {
 
-    // Stores whether the player has already guessed the correct word.
-    // It starts as false because the player has not made any guesses yet.
     private boolean WonOrNot = false;
-
-    // Stores the secret five-letter word selected at the beginning of the game.
     private String ActualWord;
-
-    // Stores the five characters entered by the player for the current guess.
     private char[] LetterList = new char[5];
-
-    // Stores the five characters belonging to the secret word.
-    // This allows us to compare each guessed letter with the corresponding answer
-    // letter.
     private char[] ActualWordList = new char[5];
-
-    // Stores the result for each guessed letter: "Green", "Yellow", or "Red".
-    // In this GUI, "Red" represents an incorrect letter and will be displayed in
-    // gray.
     private String[] ColorCode = new String[5];
 
     // Stores references to all 30 graphical tiles: six rows and five columns.
@@ -44,31 +30,17 @@ public class GUI extends JFrame {
     private JLabel message = new JLabel(
             "Enter a five-letter word", SwingConstants.CENTER);
 
-    // Tracks which row should receive the next valid guess.
-    // Row 0 is the first guess, row 1 is the second, and so on.
     private int currentRow = 0;
 
     // Stores every valid five-letter word loaded from the text file.
     // A Set avoids storing the same word more than once.
     private Set<String> validWords = new HashSet<>();
 
-    // Defines the background color used for letters in the correct position.
     private final Color GREEN = new Color(83, 141, 78);
-
-    // Defines the background color used for letters that occur elsewhere in the
-    // answer.
     private final Color YELLOW = new Color(201, 180, 88);
-
-    // Defines the background color used for letters that are not present in the
-    // answer.
     private final Color GRAY = new Color(120, 124, 126);
-
-    // Defines the dark background color used throughout the application.
     private final Color DARK = new Color(18, 18, 19);
 
-    // This constructor runs when we create a new GUI object using new GUI().
-    // It builds the game window and prepares the game before the player starts
-    // guessing.
     public GUI() throws FileNotFoundException {
 
         // Reads the word-list file and saves its valid words in the validWords Set.
@@ -77,14 +49,9 @@ public class GUI extends JFrame {
         // Selects one of the valid words and fills ActualWordList with its letters.
         chooseWord();
 
-        // Sets the text displayed in the window's title bar.
         setTitle("Wordle");
-
-        // Makes the application close when the player closes the window.
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Sets the initial width and height of the application window in pixels.
-        setSize(420, 620);
+        setSize(4200, 6200);
 
         // Places the window in the center of the screen.
         setLocationRelativeTo(null);
